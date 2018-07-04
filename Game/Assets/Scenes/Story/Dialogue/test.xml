@@ -1,0 +1,12 @@
+<DialogueRoot>
+	<DialogueEntries>
+		<DialogueEntry>
+			<character>Bob</character>
+			<text>Hello there</text>
+		</DialogueEntry>
+		<DialogueEntry>
+			<character>Rob</character>
+			<text>General Kenobi. Hello again.</text>
+		</DialogueEntry>
+	</DialogueEntries>
+ </DialogueRoot>

@@ -1,0 +1,14 @@
+Characters:
+MC
+AI
+Girl
+Friend
+Sister
+Gaming
+
+
+Endings:
+If too much was changed, the procedure fails. Otherwise contact is made with the 3 main
+characters. Her reaction depends on the decisions made. If good reaction with none or only
+one friend, tries again and succeeds. If good with both friends, one gaming friend has room.
+If good with sister, get place with her.

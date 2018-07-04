@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 4962992e05583a045a1f4d61b8bec6df
+  - enabled: 1
+    path: Assets/Scenes/Levels/Intro.unity
+    guid: 8d45865ccef3f3246a4ae3a4e52ddce9
+  - enabled: 1
+    path: Assets/Scenes/Levels/Jump.unity
+    guid: c06794ecf791efa48aa881017fa14cc3
+  - enabled: 1
+    path: Assets/Scenes/Levels/Move Platform.unity
+    guid: 4936184acf30e7945945674cf2fca670
+  - enabled: 1
+    path: Assets/Scenes/Levels/Jump Limit.unity
+    guid: 4fc6756a3ecdd5a46b6bc3c6059ea94a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Simple Puzzle.unity
+    guid: 8f3da54e6fca3fd46a3a2dab2b3882bf
+  - enabled: 1
+    path: Assets/Scenes/Levels/Red Intro.unity
+    guid: f77ceed7131393e4ab109ca870f9e7b7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Diagonal Jump.unity
+    guid: a0c16831bda6b884999bfcd896d56384
+  - enabled: 1
+    path: Assets/Scenes/Levels/Floor Is Lava.unity
+    guid: c0db4692fb4677845b685ec170ad9225
+  - enabled: 1
+    path: Assets/Scenes/Levels/Yellow Intro.unity
+    guid: 12cfe420a1db43f419dfb13b3710a7b4
+  - enabled: 1
+    path: Assets/Scenes/Levels/Move Finish.unity
+    guid: cc034957cf977944088f44374c92ca3b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Middle.unity
+    guid: 98fb9690997ca894c9f8a1792a6956f0
+  - enabled: 1
+    path: Assets/Scenes/Levels/Up&Down.unity
+    guid: 45a2d7e57e8c68f4eae98b5515f59683
+  - enabled: 1
+    path: Assets/Scenes/Levels/Lock It.unity
+    guid: e179a7b038d43cc458fec327cc677f32
+  - enabled: 1
+    path: Assets/Scenes/Levels/Traffic.unity
+    guid: 2a9c4ce7b56643b4a9492bc20730922a
+  - enabled: 1
+    path: Assets/Scenes/Levels/Grey Intro.unity
+    guid: d894093c1d6d36a428bc63867239214d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Switch.unity
+    guid: e9222405022730647a26de23894d431f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Parallel.unity
+    guid: 379696319931f8c4b89e2705bbfab093
+  - enabled: 1
+    path: Assets/Scenes/Levels/Six.unity
+    guid: acfeb4d54dbd7c247a33750f3d546218
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pins.unity
+    guid: 8dcfde4ed6a8cea4d80ced7b8f2e2f31

@@ -1,0 +1,3 @@
+Limited number of view switches (introduce by repeating simple early levels
+Rotate the movable platforms at certain points
+Invisible platforms in 1st person
