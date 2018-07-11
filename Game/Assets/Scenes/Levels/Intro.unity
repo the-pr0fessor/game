@@ -2276,21 +2276,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 20581914076178374, guid: ab0723b0ca55d77408614a63987d3190,
-        type: 2}
-      propertyPath: m_Depth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20581914076178374, guid: ab0723b0ca55d77408614a63987d3190,
-        type: 2}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20581914076178374, guid: ab0723b0ca55d77408614a63987d3190,
-        type: 2}
-      propertyPath: orthographic size
-      value: 28
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab0723b0ca55d77408614a63987d3190, type: 2}
   m_IsPrefabParent: 0
@@ -2682,7 +2667,7 @@ Prefab:
     - target: {fileID: 114822118342925734, guid: 0937cf42b811dcb46845bc7bce96a628,
         type: 2}
       propertyPath: fileName
-      value: test
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0937cf42b811dcb46845bc7bce96a628, type: 2}
@@ -2848,23 +2833,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4779556526355904, guid: c31254d3d612b0f45a400ae1ba2211e4,
     type: 2}
   m_PrefabInternal: {fileID: 431344353}
---- !u!1 &1482908794 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1119194180585772, guid: ab0723b0ca55d77408614a63987d3190,
-    type: 2}
-  m_PrefabInternal: {fileID: 960040145}
---- !u!114 &1482908795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1482908794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c38a660c9bbef46bc18cf8936430e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 0
 --- !u!43 &1543297311
 Mesh:
   m_ObjectHideFlags: 0
@@ -3950,15 +3918,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4517278890836596, guid: f7460611ad034204fbdf14ac9de664ac, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1695461443340154, guid: f7460611ad034204fbdf14ac9de664ac, type: 2}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 20195995482937610, guid: f7460611ad034204fbdf14ac9de664ac,
-        type: 2}
-      propertyPath: m_Depth
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

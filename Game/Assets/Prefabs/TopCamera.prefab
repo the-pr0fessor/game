@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 124321313982592246}
   - component: {fileID: 92019817544382158}
   - component: {fileID: 114770846054050362}
+  - component: {fileID: 114079302557956514}
+  - component: {fileID: 114382275737443754}
+  - component: {fileID: 114886332715997136}
   m_Layer: 0
   m_Name: TopCamera
   m_TagString: Second Camera
@@ -63,8 +66,8 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
-  m_Depth: -1.74
+  orthographic size: 28
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -86,7 +89,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1119194180585772}
   m_Enabled: 1
---- !u!114 &114770846054050362
+--- !u!114 &114079302557956514
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,6 +101,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 0
+--- !u!114 &114382275737443754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119194180585772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec31e34ddcc1104eae1a279161beee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114770846054050362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119194180585772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c38a660c9bbef46bc18cf8936430e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 0.25
+--- !u!114 &114886332715997136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119194180585772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf303bef50bfd114e8a2a72ed95bc309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendTime: 0.25
 --- !u!124 &124321313982592246
 Behaviour:
   m_ObjectHideFlags: 1

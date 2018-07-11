@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d29a6fc30ca52942b592934dce4ba41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: test
-  sourceFolder: G:\Unity\Game\Assets\Scenes\Story\Dialogue
+  fileName: 1
+  sourceFolder: C:\Users\James2\OneDrive\Documents\Game\Scripts\Text
 --- !u!4 &224897506
 Transform:
   m_ObjectHideFlags: 0

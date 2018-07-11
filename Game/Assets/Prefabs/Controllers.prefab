@@ -70,6 +70,7 @@ MonoBehaviour:
   topCamera: {fileID: 0}
   movement: {fileID: 0}
   cameraLook: {fileID: 0}
+  blendTime: 0.25
   cursorTexture: {fileID: 2800000, guid: 0dfa8462e658e95429930b50b802a921, type: 3}
   menuCursorTexture: {fileID: 2800000, guid: 54682d9dc294eb4429ffe9d0c93b9a44, type: 3}
 --- !u!114 &114623765802839706
@@ -95,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e925eab921e7f478aa0d294a172376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textSpeed: 0.02
+  textSpeed: 0.01
   textHeight: 330
-  path: 
+  fileName: 
 --- !u!114 &114938751167411852
 MonoBehaviour:
   m_ObjectHideFlags: 1
