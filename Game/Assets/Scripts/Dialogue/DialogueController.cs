@@ -22,9 +22,10 @@ public class DialogueController : MonoBehaviour
 
    
     int entryNo;
-    int sentenceNo;
+    int wordNo;
     
     string previousSmallText;
+    float previousHeight;
 
     List<string> currentTextArr;
 
@@ -56,8 +57,8 @@ public class DialogueController : MonoBehaviour
             //dr = DialogueRoot.Load(GetPath());
             dr = DialogueRoot.LoadFromResources(fileName);
 
-            // If couldn't find file
-            if (dr.IsEmpty())
+            // If couldn't find file or not doing dialogue
+            if (dr.IsEmpty() || LevelController.levelController.editor)
             {
                 Finish();
             }
@@ -102,7 +103,7 @@ public class DialogueController : MonoBehaviour
                     // Otherwise get the next dialogue entry
                     else
                     {
-                        // Split on sentences to deal with overflows
+                        // Split on words to deal with overflows
                         GetNextDialogue();
                     }
                 }
@@ -116,28 +117,41 @@ public class DialogueController : MonoBehaviour
                 }
             }
 
-            // If there are sentences left to print
+            // If there are words left to print
             if (currentTextArr.Count > 0 && !overflowed && !done)
             {
-                // If the current sentence is empty
-                if (currentTextArr[sentenceNo].Length == 0)
+                // If the current word is empty
+                if (currentTextArr[wordNo].Length == 0)
                 {
-                    sentenceNo++;
+                    wordNo++;
 
-                    // If the current sentence was the last
-                    if (sentenceNo >= currentTextArr.Count - 1)
+                    // If the current word was the last
+                    if (wordNo >= currentTextArr.Count)
                     {
                         done = true;
                     }
-                    // Otherwise check the next sentence fits
+                    // Otherwise check the next word fits
                     else
                     {
+                        previousHeight = smallText.preferredHeight;
                         previousSmallText = smallText.text;
-                        smallText.text += currentTextArr[sentenceNo];
+                        smallText.text += currentTextArr[wordNo];
+                        float newHeight = smallText.preferredHeight;
+
 
                         if (smallText.preferredHeight > textHeight)
                         {
                             overflowed = true;
+                        }
+                        // If the word overflows on to the next line, go to the next line
+                        else if (previousHeight != newHeight)
+                        {
+                            // If it's not going to a new line anyway
+                            smallText.text = previousSmallText + "k";
+                            if (smallText.preferredHeight != newHeight)
+                            {                                
+                                previousSmallText += Environment.NewLine;
+                            }     
                         }
 
                         smallText.text = previousSmallText;
@@ -151,8 +165,8 @@ public class DialogueController : MonoBehaviour
                     if (timer > textSpeed)
                     {
                         timer = 0;
-                        string letter = currentTextArr[sentenceNo].Substring(0, 1);
-                        currentTextArr[sentenceNo] = currentTextArr[sentenceNo].Substring(1);
+                        string letter = currentTextArr[wordNo].Substring(0, 1);
+                        currentTextArr[wordNo] = currentTextArr[wordNo].Substring(1);
                         smallText.text += letter;
                     }
                 }
@@ -160,12 +174,13 @@ public class DialogueController : MonoBehaviour
         }         
     }
 
-    // Dialogue entries are split on full stops, so they need to be put back
-    void PutFullStopsBack()
+    // Dialogue entries are split on spaces, so they need to be put back
+    void PutSpacesBack()
     {
         for (int i = 0; i < currentTextArr.Count; i++)
         {
-            currentTextArr[i] = currentTextArr[i] + ".";
+            //currentTextArr[i] = currentTextArr[i] + ".";
+            currentTextArr[i] = currentTextArr[i] + " ";
         }
     }
 
@@ -189,14 +204,14 @@ public class DialogueController : MonoBehaviour
 
     public void GetNextDialogue()
     {
-        currentTextArr = new List<string>(dr.dialogueEntries[entryNo].text.Split('.'));
-        PutFullStopsBack();
+        currentTextArr = new List<string>(dr.dialogueEntries[entryNo].text.Split(' '));
+        PutSpacesBack();
         smallText.text = "";
         nameText.text = dr.dialogueEntries[entryNo].character;
 
         entryNo++;
         timer = 0;
-        sentenceNo = 0;
+        wordNo = 0;
         previousSmallText = "";
     }
 

@@ -9,6 +9,9 @@ public class ViewController : MonoBehaviour {
 
     public Movement movement;
     public CameraLook cameraLook;
+
+    public float blendTime;
+
     PlatformController platformController;
 
     InterfaceController ic;
@@ -16,6 +19,9 @@ public class ViewController : MonoBehaviour {
     public Texture2D menuCursorTexture;
 
     Collider playerCollider;
+
+    CameraBlend fpCameraBlend;
+    CameraBlend topCameraBlend;
 
     bool topDownView;
 
@@ -26,7 +32,12 @@ public class ViewController : MonoBehaviour {
     {
         ic = GetComponent<InterfaceController>();
         playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>();
-        platformController = GameObject.FindGameObjectWithTag("Platform Controller").GetComponent<PlatformController>();        
+        platformController = GameObject.FindGameObjectWithTag("Platform Controller").GetComponent<PlatformController>();
+        fpCameraBlend = firstPersonCamera.GetComponent<CameraBlend>();
+        topCameraBlend = topCamera.GetComponent<CameraBlend>();
+
+        fpCameraBlend.blendTime = blendTime;
+        topCameraBlend.blendTime = blendTime;
     }
 
     void Start () {
@@ -39,6 +50,7 @@ public class ViewController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (starting)
         {
             startTimer += Time.deltaTime;
@@ -56,11 +68,13 @@ public class ViewController : MonoBehaviour {
             topDownView = !topDownView;
             if (topDownView)
             {                
-                StartTopDown();             
+                StartTopDown();
+                topCameraBlend.Switch(); // Don't want this to happen at start
             }
             else
             {                
                 StartFirstPerson();
+                fpCameraBlend.Switch();
             }
         }
     }
@@ -74,7 +88,7 @@ public class ViewController : MonoBehaviour {
         cameraLook.StartControl();
         platformController.StopControl();
         Cursor.visible = false;
-        playerCollider.enabled = true;
+        playerCollider.enabled = true;        
     }
 
     public void StartTopDown()
@@ -86,7 +100,7 @@ public class ViewController : MonoBehaviour {
         cameraLook.StopControl();
         platformController.StartControl();
         Cursor.visible = true;
-        playerCollider.enabled = false;
+        playerCollider.enabled = false;        
     }
 
     public bool IsTopDown()

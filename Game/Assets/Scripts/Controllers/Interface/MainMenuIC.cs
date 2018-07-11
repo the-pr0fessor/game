@@ -9,6 +9,7 @@ public class MainMenuIC : InterfaceController {
     public Canvas overwriteCanvas;
     public Canvas loadCanvas;
     public Canvas noSaveCanvas;
+    public Canvas saveCorruptedCanvas;
 
     int slotNo;
 
@@ -24,6 +25,7 @@ public class MainMenuIC : InterfaceController {
         overwriteCanvas.enabled = false;
         loadCanvas.enabled = false;
         noSaveCanvas.enabled = false;
+        saveCorruptedCanvas.enabled = false;
 }
 
     public void CreateNewSave(int newSlotNo)
@@ -56,10 +58,16 @@ public class MainMenuIC : InterfaceController {
 
     public void LoadSave(int newSlotNo)
     {
-        if (!LevelController.levelController.Load(newSlotNo))
+        int result = LevelController.levelController.Load(newSlotNo);
+
+        if (result == 1)
         {
             ShowDialogBox(noSaveCanvas);
-        }        
+        }       
+        else if (result == 2)
+        {
+            ShowDialogBox(saveCorruptedCanvas);
+        }
     }
 
     public void ShowNewCanvas()

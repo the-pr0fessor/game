@@ -11,6 +11,8 @@ public class LevelController : MonoBehaviour {
 
     public static LevelController levelController;
 
+    public bool editor;
+
     public int currentLevel;
 
     string fileName = "save";
@@ -48,31 +50,38 @@ public class LevelController : MonoBehaviour {
             file = File.Open(GetPath(saveNo), FileMode.Open);
         }
 
-        GameData gameData = new GameData();
-        gameData.currentLevel = currentLevel;
-        gameData.slotUsed = true;
-
+        G gameData = new G();
+        gameData.c = currentLevel;
         bf.Serialize(file, gameData);
 
         file.Close();
     }
 	
-
-    public bool Load(int newSaveNo)
+    // 0 = successful load
+    // 1 = file doesn't exist
+    // 2 = file is corrupted
+    public int Load(int newSaveNo)
     {
         if (File.Exists(GetPath(newSaveNo)))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(GetPath(newSaveNo), FileMode.Open);
-            GameData gameData = (GameData) bf.Deserialize(file);
-            file.Close();
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(GetPath(newSaveNo), FileMode.Open);
+                G gameData = (G)bf.Deserialize(file);
+                file.Close();
 
-            currentLevel = gameData.currentLevel;
-            saveNo = newSaveNo;
-            LoadLevel(currentLevel);
-            return true;
+                currentLevel = gameData.c;
+                saveNo = newSaveNo;
+                LoadLevel(currentLevel);
+                return 0;
+            }
+            catch
+            {
+                return 2;
+            }
         }
-        return false;
+        return 1;
     }
 
     // Return false if save already exists, call again with overwrite true to overwrite the save
@@ -83,14 +92,8 @@ public class LevelController : MonoBehaviour {
             WriteNewSave(newSaveNo);            
         }
         else
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file;
-            file = File.Open(GetPath(newSaveNo), FileMode.Open);
-            GameData gameData = (GameData)bf.Deserialize(file);
-            file.Close();
-
-            if (!gameData.slotUsed || overwrite)
+        {        
+            if (overwrite)
             {
                 WriteNewSave(newSaveNo);
             }
@@ -105,13 +108,13 @@ public class LevelController : MonoBehaviour {
 
     void WriteNewSave(int newSaveNo)
     {
+        // Make the save file
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file;
         file = File.Create(GetPath(newSaveNo));
         saveNo = newSaveNo;
-        GameData gameData = new GameData();
-        gameData.slotUsed = true;
-        gameData.currentLevel = 1;
+        G gameData = new G();
+        gameData.c = 1;
         bf.Serialize(file, gameData);
         file.Close();
     }
@@ -157,10 +160,9 @@ public class LevelController : MonoBehaviour {
 }
 
 [Serializable]
-class GameData
+class G
 {
-    public int currentLevel;
-    public bool slotUsed;
+    public int c;
 }
 
 [Serializable]

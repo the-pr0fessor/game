@@ -19,21 +19,6 @@ public class SceneIC : InterfaceController {
 
     public override bool ShowingUI()
     {
-        if (showingDialogBox)
-        {
-            Debug.Log("DB");
-        }
-
-        if (showingMenu)
-        {
-            Debug.Log("M");
-        }
-
-        if (showingSubMenu)
-        {
-            Debug.Log("Sm");
-        }
-
         return base.ShowingUI() || showingDialogue;
     }
 
