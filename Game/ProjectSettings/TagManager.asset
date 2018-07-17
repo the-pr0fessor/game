@@ -17,6 +17,8 @@ TagManager:
   - Name Panel
   - Dialogue Text
   - Name Text
+  - Image
+  - InvisibleWall
   layers:
   - Default
   - TransparentFX

@@ -81,6 +81,7 @@ public class LifeController : MonoBehaviour {
             {
                 starting = 0;
                 cameraController.SetIntensity(0);
+                GameObject.FindGameObjectWithTag("Controllers").GetComponent<DCLevel>().StartShowingDialogue();
             }
         }
 

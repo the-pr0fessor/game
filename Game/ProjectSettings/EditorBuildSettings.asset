@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 4962992e05583a045a1f4d61b8bec6df
   - enabled: 1
+    path: Assets/Scenes/Story/Intro.unity
+    guid: 6e33967377e570e40b1a1c33186d8ee7
+  - enabled: 1
     path: Assets/Scenes/Levels/Intro.unity
     guid: 8d45865ccef3f3246a4ae3a4e52ddce9
   - enabled: 1
@@ -23,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Simple Puzzle.unity
     guid: 8f3da54e6fca3fd46a3a2dab2b3882bf
+  - enabled: 1
+    path: Assets/Scenes/Puzzles/Maze.unity
+    guid: 5a93d97d6f74a4542b9f4fe4f6aa3dcf
   - enabled: 1
     path: Assets/Scenes/Levels/Red Intro.unity
     guid: f77ceed7131393e4ab109ca870f9e7b7

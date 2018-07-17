@@ -222,6 +222,10 @@ public class Movement : MonoBehaviour {
         {
             finished = true;
         }
+        else if (collision.gameObject.tag == "InvisibleWall")
+        {
+            GameObject.FindGameObjectWithTag("Controllers").GetComponent<LifeController>().RestartLevel();
+        }
     }
     
 

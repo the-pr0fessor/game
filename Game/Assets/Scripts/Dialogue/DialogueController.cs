@@ -14,30 +14,28 @@ public class DialogueController : MonoBehaviour
     public float textSpeed;
     public float textHeight; // type stuff until text box overflows, this is the last valid height
     public string fileName;
-
-    //Canvas fullCanvas;
-    Canvas smallCanvas;
-    Text smallText;
-    Text nameText;
-
-   
-    int entryNo;
-    int wordNo;
+    public float fadeTime;
     
-    string previousSmallText;
-    float previousHeight;
+    //Canvas fullCanvas;
+    protected Canvas smallCanvas;
+    protected Text smallText;
+    protected Text nameText;
 
-    List<string> currentTextArr;
-
-    float timer;
-
-    bool done;
-
-    bool overflowed;
-
-    DialogueRoot dr;
-
-    bool noMoreDialogue;
+    protected int entryNo;
+    protected int wordNo;
+    protected string previousSmallText;
+    protected float previousHeight;
+    protected List<string> currentTextArr;
+    protected float timer;
+    protected bool done;
+    protected bool overflowed;
+    protected DialogueRoot dr;
+    protected bool noMoreDialogue;
+    Image dialogueCanvasImage;
+    float alpha;
+    bool starting;
+    Color nameTextColour;
+    bool emptyDialogue;
 
     protected virtual void Awake()
     {
@@ -46,12 +44,20 @@ public class DialogueController : MonoBehaviour
         //smallText = smallCanvas.GetComponentInChildren<Text>();
         smallText = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<Text>();
         nameText = GameObject.FindGameObjectWithTag("Name Text").GetComponent<Text>();
+        dialogueCanvasImage = GameObject.FindGameObjectWithTag("Dialogue Panel").GetComponent<Image>();
     }
 
     protected virtual void Start()
     {
+        emptyDialogue = false;
         if (fileName != "")
         {
+            // Convert the scripts if in editor
+            if (Application.isEditor)
+            {
+                DialogueConverter.Convert();                
+            }
+
             dr = new DialogueRoot();
             //dr = DialogueRoot.LoadFromObject(path);
             //dr = DialogueRoot.Load(GetPath());
@@ -60,42 +66,50 @@ public class DialogueController : MonoBehaviour
             // If couldn't find file or not doing dialogue
             if (dr.IsEmpty() || LevelController.levelController.editor)
             {
+                emptyDialogue = true;
                 Finish();
             }
             else
             {
-                smallCanvas.enabled = true;
+                //smallCanvas.enabled = true;
                 entryNo = 0;
                 timer = 0;
                 currentTextArr = new List<string>();
                 done = false;
                 overflowed = false;
-                noMoreDialogue = false;
+                //noMoreDialogue = false;
 
                 GetNextDialogue();
 
                 textHeight = smallText.rectTransform.rect.size.y;
+
+                noMoreDialogue = true;
+                smallCanvas.enabled = true;
+                alpha = 0;
+                starting = false;
+                dialogueCanvasImage.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+                nameTextColour = nameText.color;
+                nameText.color = new Color(nameTextColour.r, nameTextColour.g, nameTextColour.b, 0.0f);                
             }   
         }
         else
         {
             Finish();
+            emptyDialogue = true;
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        if (!noMoreDialogue)
+        if (!noMoreDialogue && !emptyDialogue)
         {
             // Move to next on click
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 // If the current dialgoue entry is finished
                 if (done)
-                {
-                    done = false;
-
-                    // If the current dialogue entry was the last one, finish up
+                {          
+                    // If the current dialogue entry was the last one, finish
                     if (entryNo >= dr.dialogueEntries.Count())
                     {                        
                         Finish();
@@ -147,7 +161,7 @@ public class DialogueController : MonoBehaviour
                         else if (previousHeight != newHeight)
                         {
                             // If it's not going to a new line anyway
-                            smallText.text = previousSmallText + "k";
+                            smallText.text = previousSmallText + "k"; // Doesn't work with spaces...
                             if (smallText.preferredHeight != newHeight)
                             {                                
                                 previousSmallText += Environment.NewLine;
@@ -171,11 +185,38 @@ public class DialogueController : MonoBehaviour
                     }
                 }
             }
-        }         
+        }
+
+
+        // Fade in
+        if (starting)
+        {
+            timer += Time.deltaTime;
+
+            if (alpha <= (218.0f / 255.0f))
+            {
+                alpha += Time.deltaTime / fadeTime;
+                dialogueCanvasImage.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+                nameText.color = new Color(nameTextColour.r, nameTextColour.g, nameTextColour.b, alpha);
+            }
+            else
+            {
+                dialogueCanvasImage.color = new Color(1.0f, 1.0f, 1.0f, (218.0f / 255.0f));
+                nameText.color = new Color(nameTextColour.r, nameTextColour.g, nameTextColour.b, (218.0f / 255.0f));
+                noMoreDialogue = false;
+                starting = false;
+            }
+        }
+    }
+
+    // Start the fade in
+    public void StartShowingDialogue()
+    {
+        starting = true;        
     }
 
     // Dialogue entries are split on spaces, so they need to be put back
-    void PutSpacesBack()
+    protected void PutSpacesBack()
     {
         for (int i = 0; i < currentTextArr.Count; i++)
         {
@@ -202,17 +243,19 @@ public class DialogueController : MonoBehaviour
         return !noMoreDialogue;
     }
 
-    public void GetNextDialogue()
+    public virtual void GetNextDialogue()
     {
-        currentTextArr = new List<string>(dr.dialogueEntries[entryNo].text.Split(' '));
+        currentTextArr = new List<string>(dr.dialogueEntries[entryNo].text.Split(' '));       
+        string character = dr.dialogueEntries[entryNo].character;
+        entryNo++;
+
         PutSpacesBack();
         smallText.text = "";
-        nameText.text = dr.dialogueEntries[entryNo].character;
-
-        entryNo++;
+        nameText.text = character;
+        done = false;            
         timer = 0;
         wordNo = 0;
-        previousSmallText = "";
+        previousSmallText = "";           
     }
 
     string GetPath()

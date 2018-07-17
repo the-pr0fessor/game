@@ -99,6 +99,7 @@ MonoBehaviour:
   textSpeed: 0.01
   textHeight: 330
   fileName: 
+  fadeTime: 0.25
 --- !u!114 &114938751167411852
 MonoBehaviour:
   m_ObjectHideFlags: 1

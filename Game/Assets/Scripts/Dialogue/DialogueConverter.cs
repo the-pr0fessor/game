@@ -8,31 +8,41 @@ using System.IO;
 
 public class DialogueConverter : MonoBehaviour {
 
-    public string fileName;
     public string sourceFolder;
-    
-	void Start () {
-        Encryption.EncryptString(FormatToXML(), GetEncName());
+
+    void Start()
+    {
+        // Cycle through each text file
+        foreach (string fileName in Directory.GetFiles(sourceFolder, "*.txt"))
+        {
+            Encryption.EncryptString(FormatToXML(fileName), GetEncName(fileName));
+        }
+
         Debug.Log("Done");
     }
 
-    string GetTextName()
+    public static void Convert()
     {
-        return sourceFolder + @"\" + fileName + ".txt";
+        foreach (string fileName in Directory.GetFiles(@"C:\Users\James2\OneDrive\Documents\Game\Scripts\text", "*.txt"))
+        {
+            Encryption.EncryptString(FormatToXML(fileName), GetEncName(fileName));
+        }
     }
 
-    string GetEncName()
+    // Get the path to store the file in the app
+    static string GetEncName(string fileName)
     {
-        return Application.streamingAssetsPath + @"/Scripts/" + fileName + ".bytes";
+        string name = Path.GetFileName(fileName);
+        name = name.Substring(0, name.Length - 4);
+        return Application.streamingAssetsPath + @"/Scripts/" + name + ".bytes";
     }
 
     // Make the XML file from the notation
-    string FormatToXML()
+    static string FormatToXML(string fileName)
     {
-        string xml = File.ReadAllText(GetTextName());
+        string xml = File.ReadAllText(fileName);
 
         xml = "<DialogueRoot>" + Environment.NewLine + "<DialogueEntries>" + Environment.NewLine + xml + Environment.NewLine + "</DialogueEntries>" + Environment.NewLine + "</DialogueRoot>";
-
         xml = xml.Replace("[", "<DialogueEntry>" + Environment.NewLine + "<character>");
         xml = xml.Replace(" | ", "</character>" + Environment.NewLine + "<text>");
         xml = xml.Replace("]", "</text>" + Environment.NewLine + "</DialogueEntry>");
