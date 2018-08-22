@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 4962992e05583a045a1f4d61b8bec6df
   - enabled: 1
+    path: Assets/Scenes/Story/Implant.unity
+    guid: 6a512bfce63ed414b9c89cc7be8db162
+  - enabled: 1
     path: Assets/Scenes/Story/Intro.unity
     guid: 6e33967377e570e40b1a1c33186d8ee7
   - enabled: 1
@@ -48,8 +51,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Middle.unity
     guid: 98fb9690997ca894c9f8a1792a6956f0
   - enabled: 1
+    path: Assets/Scenes/Levels/Hops.unity
+    guid: 46cf2f932655a244b82d3d60f2cd3e77
+  - enabled: 1
     path: Assets/Scenes/Levels/Up&Down.unity
     guid: 45a2d7e57e8c68f4eae98b5515f59683
+  - enabled: 1
+    path: Assets/Scenes/Levels/Quad Finish.unity
+    guid: 62e5508a49adfd148911ad8d69c2fa76
   - enabled: 1
     path: Assets/Scenes/Levels/Lock It.unity
     guid: e179a7b038d43cc458fec327cc677f32
@@ -60,8 +69,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Grey Intro.unity
     guid: d894093c1d6d36a428bc63867239214d
   - enabled: 1
+    path: Assets/Scenes/Levels/Slide 1.unity
+    guid: c712a9d4fd92878438657e6fb3775293
+  - enabled: 1
     path: Assets/Scenes/Levels/Switch.unity
     guid: e9222405022730647a26de23894d431f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Two.unity
+    guid: aed1e7e15ae23f64c912b0df9d7c22fe
   - enabled: 1
     path: Assets/Scenes/Levels/Parallel.unity
     guid: 379696319931f8c4b89e2705bbfab093
@@ -71,3 +86,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Pins.unity
     guid: 8dcfde4ed6a8cea4d80ced7b8f2e2f31
+  - enabled: 1
+    path: Assets/Scenes/Levels/Two Down.unity
+    guid: dc8db4cba67711a4588777ad6b94a8e0

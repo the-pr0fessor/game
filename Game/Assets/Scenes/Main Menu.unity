@@ -402,6 +402,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114791450165676104, guid: 158b7b6fa1cbd4443b8243b0a760e8af,
+        type: 2}
+      propertyPath: editor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 158b7b6fa1cbd4443b8243b0a760e8af, type: 2}
   m_IsPrefabParent: 0
@@ -2963,6 +2968,7 @@ MonoBehaviour:
   overwriteCanvas: {fileID: 1732740807}
   loadCanvas: {fileID: 281865082}
   noSaveCanvas: {fileID: 1901846718}
+  saveCorruptedCanvas: {fileID: 0}
 --- !u!1001 &1732740806
 Prefab:
   m_ObjectHideFlags: 0

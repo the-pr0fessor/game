@@ -25,7 +25,7 @@ public class MainMenuIC : InterfaceController {
         overwriteCanvas.enabled = false;
         loadCanvas.enabled = false;
         noSaveCanvas.enabled = false;
-        saveCorruptedCanvas.enabled = false;
+        //saveCorruptedCanvas.enabled = false;
 }
 
     public void CreateNewSave(int newSlotNo)

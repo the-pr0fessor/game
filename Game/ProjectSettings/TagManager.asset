@@ -19,6 +19,10 @@ TagManager:
   - Name Text
   - Image
   - InvisibleWall
+  - ChoiceCanvas
+  - TunnelTriggerLeft
+  - TunnelTriggerRight
+  - TunnelTriggerMiddle
   layers:
   - Default
   - TransparentFX

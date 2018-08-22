@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformController : MonoBehaviour {
-    Camera topCamera;
+    public bool enabled = true;
+    protected Camera topCamera;
     public float speed = 1f;
     public float responsiveness = 9f;
 
-    int mask;
+    protected int mask;
     bool platformSelected;
 
-    bool topDownView;
+    protected bool topDownView;
 
-    PlatformMove platform;
+    protected PlatformMove platform;
 
-    InterfaceController ic;
+    protected InterfaceController ic;
     
     private void Awake()
     {
@@ -24,13 +25,13 @@ public class PlatformController : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
         platformSelected = false;        
     }
 	
 	// Update is called once per frame
-	void Update () {
-        if (topDownView && !ic.ShowingUI())
+	protected virtual void Update () {
+        if (topDownView && !ic.ShowingUI() && enabled)
         {
             // Get platform clicked on
             if (Input.GetButtonDown("Fire1"))
@@ -77,7 +78,7 @@ public class PlatformController : MonoBehaviour {
 	}
 
     // Cast ray in to scene to get platform clicked on
-    void GetPlatform()
+    protected virtual void GetPlatform()
     {
         if (platform != null)
         {

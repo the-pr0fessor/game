@@ -15,6 +15,8 @@ public class LevelController : MonoBehaviour {
 
     public int currentLevel;
 
+    public G currentSave;
+
     string fileName = "save";
     string fileFormat = ".sav";
 
@@ -50,9 +52,9 @@ public class LevelController : MonoBehaviour {
             file = File.Open(GetPath(saveNo), FileMode.Open);
         }
 
-        G gameData = new G();
-        gameData.c = currentLevel;
-        bf.Serialize(file, gameData);
+        //G gameData = new G();
+        currentSave.c = currentLevel;
+        bf.Serialize(file, currentSave);
 
         file.Close();
     }
@@ -68,10 +70,10 @@ public class LevelController : MonoBehaviour {
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(GetPath(newSaveNo), FileMode.Open);
-                G gameData = (G)bf.Deserialize(file);
+                currentSave = (G)bf.Deserialize(file);
                 file.Close();
 
-                currentLevel = gameData.c;
+                currentLevel = currentSave.c;
                 saveNo = newSaveNo;
                 LoadLevel(currentLevel);
                 return 0;
@@ -156,13 +158,35 @@ public class LevelController : MonoBehaviour {
     {
         //SceneManager.LoadScene("Level " + levelNo.ToString(), LoadSceneMode.Single);
         SceneManager.LoadScene(levelNo, LoadSceneMode.Single);
-    }
+    }    
 }
 
 [Serializable]
-class G
+public class G // GameData
 {
-    public int c;
+    public int c; // current level
+
+    // The different choices. Rename to something simpler later
+    public int acceptsMid;
+
+    // Hardcoding the options. Sometimes simple is better
+    public void SetChoice(string choice, int optionNo)
+    {
+        if (choice == "acceptsMid")
+        {
+            acceptsMid = optionNo;
+        }
+    }
+
+    public int GetChoice(string choice)
+    {
+        if (choice == "acceptsMid")
+        {
+            return acceptsMid;
+        }
+
+        return 0;
+    }
 }
 
 [Serializable]

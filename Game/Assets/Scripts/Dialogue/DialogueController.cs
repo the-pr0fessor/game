@@ -31,11 +31,12 @@ public class DialogueController : MonoBehaviour
     protected bool overflowed;
     protected DialogueRoot dr;
     protected bool noMoreDialogue;
-    Image dialogueCanvasImage;
+    protected Image dialogueCanvasImage;
     float alpha;
     bool starting;
     Color nameTextColour;
     bool emptyDialogue;
+    protected bool forceNext;
 
     protected virtual void Awake()
     {
@@ -50,6 +51,7 @@ public class DialogueController : MonoBehaviour
     protected virtual void Start()
     {
         emptyDialogue = false;
+        forceNext = false;
         if (fileName != "")
         {
             // Convert the scripts if in editor
@@ -104,8 +106,9 @@ public class DialogueController : MonoBehaviour
         if (!noMoreDialogue && !emptyDialogue)
         {
             // Move to next on click
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) || forceNext)
             {
+                forceNext = false;
                 // If the current dialgoue entry is finished
                 if (done)
                 {          

@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour {
 
     float vSpeed = 0;
     float hSpeed = 0;
+    Vector3 velocity;
 
     bool topDownView;
     bool jumping;
@@ -232,13 +233,15 @@ public class Movement : MonoBehaviour {
     public void StartControl()
     {
         topDownView = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;        
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        rb.velocity = velocity;
     }
 
     public void StopControl()
     {
+        velocity = rb.velocity;
         topDownView = true;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.constraints = RigidbodyConstraints.FreezeAll;        
     }
 
     public void Reset(Vector3 position, Vector3 forward, bool forceReset)
