@@ -8,11 +8,21 @@ public class DCDialgoue : DialogueController {
     public Text option1Text;
     public Text option2Text;
 
+    public Image sprite1;
+    public Image sprite2;
+    public Image sprite3;
+
     public float flashTime;
+    public float spriteLoadTime;
     protected Image background;
     int loading; // 0 = not loading, 1 = starting, 2 = finishing
     int changing; // changing background, same as above
+    int addingSprite; // 0 = nothing, 1 = loading sprite, 2 = removing sprite, 3 = changing sprite
+
     string backgroundAddress;
+    string spriteAddress;
+    string spriteNo;
+    float spriteOpacity;
     string choice;
     int choiceNo;
 
@@ -72,7 +82,98 @@ public class DCDialgoue : DialogueController {
                 GetNextDialogue(); // Get the next actual text
             }
         }
+
+        if (addingSprite == 1)
+        {
+            if (spriteOpacity < 1)
+            {
+                if (spriteNo == "1")
+                {
+                    sprite1.color = new Color(1, 1, 1, spriteOpacity);
+                }
+                else if (spriteNo == "2")
+                {
+                    sprite2.color = new Color(1, 1, 1, spriteOpacity);
+                }
+                else
+                {
+                    sprite3.color = new Color(1, 1, 1, spriteOpacity);
+                }
+
+                spriteOpacity += Time.deltaTime / spriteLoadTime;
+            }
+            else
+            {
+                if (spriteNo == "1")
+                {
+                    sprite1.color = new Color(1, 1, 1, 1);
+                }
+                else if (spriteNo == "2")
+                {
+                    sprite2.color = new Color(1, 1, 1, 1);
+                }
+                else
+                {
+                    sprite3.color = new Color(1, 1, 1, 1);
+                }
+                addingSprite = 0;
+
+                done = true;
+                currentTextArr.Clear();
+                GetNextDialogue(); // Get the next actual text
+            }
+        }
+
+        if (addingSprite == 2)
+        {
+            if (spriteOpacity > 0)
+            {
+                if (spriteNo == "1")
+                {
+                    sprite1.color = new Color(1, 1, 1, spriteOpacity);
+                }
+                else if (spriteNo == "2")
+                {
+                    sprite2.color = new Color(1, 1, 1, spriteOpacity);
+                }
+                else
+                {
+                    sprite3.color = new Color(1, 1, 1, spriteOpacity);
+                }
+
+                spriteOpacity -= Time.deltaTime / spriteLoadTime;
+            }
+            else
+            {
+                if (spriteNo == "1")
+                {
+                    sprite1.color = new Color(1, 1, 1, 0);
+                }
+                else if (spriteNo == "2")
+                {
+                    sprite2.color = new Color(1, 1, 1, 0);
+                }
+                else
+                {
+                    sprite3.color = new Color(1, 1, 1, 0);
+                }
+                addingSprite = 0;
+
+                done = true;
+                currentTextArr.Clear();
+                GetNextDialogue(); // Get the next actual text
+            }
+        }
+
+        if (addingSprite == 3)
+        {
+            addingSprite = 0;
+            done = true;
+            currentTextArr.Clear();
+            GetNextDialogue(); // Get the next actual text
+        }
     }
+    
 
     protected override void Start()
     {
@@ -88,6 +189,8 @@ public class DCDialgoue : DialogueController {
         cameraController = GameObject.FindGameObjectWithTag("Controllers").GetComponent<CameraControllerDialogue>();
         loading = 1;
         changing = 0;
+        addingSprite = 0;
+        spriteOpacity = 0;
     }
 
     protected override void Finish()
@@ -117,6 +220,62 @@ public class DCDialgoue : DialogueController {
             //currentTextArr.Clear();
             //GetNextDialogue(); // Get the next actual text
         }
+        // New sprite
+        else if (character == "addSprite")
+        {
+            spriteNo = dr.dialogueEntries[entryNo].text.Split('^')[0];
+            spriteAddress = "Sprites/" + dr.dialogueEntries[entryNo].text.Split('^')[1] + "/" + dr.dialogueEntries[entryNo].text.Split('^')[2] + "/" + dr.dialogueEntries[entryNo].text.Split('^')[3];
+            spriteOpacity = 0f;
+            addingSprite = 1;
+
+            if (spriteNo == "1")
+            {
+                sprite1.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+                //sprite1.color = new Color(1, 1, 1, 1);
+            }
+            else if (spriteNo == "2")
+            {
+                sprite2.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+                //sprite2.color = new Color(1, 1, 1, 1);
+            }
+            else
+            {
+                sprite3.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+                //sprite3.color = new Color(1, 1, 1, 1);
+            }
+
+            //done = true;
+            //currentTextArr.Clear();
+            //entryNo++;
+            //GetNextDialogue(); // Get the next actual text
+
+        }
+        else if (character == "changeSprite")
+        {
+            spriteNo = dr.dialogueEntries[entryNo].text.Split('^')[0];
+            spriteAddress = "Sprites/" + dr.dialogueEntries[entryNo].text.Split('^')[1] + "/" + dr.dialogueEntries[entryNo].text.Split('^')[2] + "/" + dr.dialogueEntries[entryNo].text.Split('^')[3];
+            spriteOpacity = 0f;
+            addingSprite = 3;
+
+            if (spriteNo == "1")
+            {
+                sprite1.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+            }
+            else if (spriteNo == "2")
+            {
+                sprite2.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+            }
+            else
+            {
+                sprite3.overrideSprite = Resources.Load<Sprite>(spriteAddress);
+            }  
+        }
+        else if (character == "removeSprite")
+        {
+            spriteNo = dr.dialogueEntries[entryNo].text;
+            spriteOpacity = 1;
+            addingSprite = 2;
+        }
         // A choice
         else if (character == "choice")
         {
@@ -141,9 +300,7 @@ public class DCDialgoue : DialogueController {
         {            
             // If this wasn't the choice made, skip ahead to next block
             if (choiceNo.ToString() != currentTextArr[0])
-            {
-                
-
+            {       
                 if (dr.dialogueEntries[entryNo].text != "end")
                 {
                     entryNo++;
@@ -153,9 +310,7 @@ public class DCDialgoue : DialogueController {
                     {
                         entryNo++;
                     }
-                }
-
-                
+                }                
             }
 
             forceNext = true;

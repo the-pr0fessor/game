@@ -43,7 +43,10 @@ public class ViewController : MonoBehaviour {
     void Start () {
         startTimer = 0;
         starting = true;
-        
+
+        movement.StopControl();
+        cameraLook.StopControl();
+
         //StartTopDown();
         //Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);     
     }
@@ -58,7 +61,10 @@ public class ViewController : MonoBehaviour {
             if (startTimer > 0.5)
             {
                 starting = false;
-                StartTopDown();
+                movement.StartControl();
+                cameraLook.StartControl();
+                //StartTopDown();
+                //StartFirstPerson();
             }
         }
         

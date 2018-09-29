@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour {
     public bool alive;
     public bool finished;
     public bool easyMode;
+    public bool noJump;
 
     float vSpeed = 0;
     float hSpeed = 0;
@@ -191,7 +192,7 @@ public class Movement : MonoBehaviour {
 
     void Jump()
     {
-        if (OnPlatform())
+        if (OnPlatform() && !noJump)
         {
             Vector3 up = new Vector3(0, 1, 0);
             up *= jumpForce * Time.deltaTime;

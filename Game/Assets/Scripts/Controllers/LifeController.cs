@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LifeController : MonoBehaviour {
+    public float flashTime;
+    public bool switchLimit = false;
+    public int maxNoOfSwitches = 0;
+    int switchCount;
+
     PlatformController platformController;
     GameObject player;
     Movement playerMovement;
     Vector3 initialPosition;
     Vector3 initialForward;
-    CameraController cameraController;
-    public float flashTime;
+    CameraController cameraController;    
     InterfaceController ic;
+    Canvas switchCountCanvas;
+    Text switchCountText;
 
     int resetting; // 0 = doing nothing, 1 = before moving, 2 = after moving
     int starting; // 1 = starting, 0 = not starting;
@@ -22,22 +29,53 @@ public class LifeController : MonoBehaviour {
         playerMovement = player.GetComponent<Movement>();
         cameraController = GameObject.FindGameObjectWithTag("Controllers").GetComponent<CameraController>();
         platformController = GameObject.FindGameObjectWithTag("Platform Controller").GetComponent<PlatformController>();
-        ic = GetComponent<InterfaceController>();        
+        ic = GetComponent<InterfaceController>();
+
+        if (switchLimit)
+        {
+            switchCountCanvas = GameObject.FindGameObjectWithTag("SwitchCountCanvas").GetComponentInChildren<Canvas>();
+            switchCountText = GameObject.FindGameObjectWithTag("SwitchCountCanvas").GetComponentInChildren<Text>();
+        }
     }
 
     private void Start()
     {
         initialPosition = player.transform.position;
         initialForward = player.transform.forward;
+        switchCount = 0;
 
         resetting = 0;
         starting = 1;
         fullReset = false;
         cameraController.SetIntensity(1);
+
+        
+        if (switchLimit)
+        {
+            switchCountText.text = maxNoOfSwitches.ToString();
+            switchCountCanvas.enabled = false;
+        }
     }
 
     // Update is called once per frame
-    void Update () {       
+    void Update () {
+
+        // If limit on number of switches, decrement counter on switch
+        if (Input.GetKeyDown("left ctrl") && !ic.ShowingUI() && switchLimit)
+        {
+            switchCountCanvas.enabled = !switchCountCanvas.enabled;
+            if (switchCount == maxNoOfSwitches)
+            {
+                switchCount = 0;
+                playerMovement.alive = false;
+                RestartLevel();
+            }
+            else
+            {
+                switchCount++;
+                switchCountText.text = ((maxNoOfSwitches - switchCount)/2).ToString();
+            }
+        }
 
         if (!playerMovement.alive && resetting == 0 && !playerMovement.finished)
         {
@@ -93,7 +131,7 @@ public class LifeController : MonoBehaviour {
             {
                 LevelController.levelController.LoadNextLevel();
             }
-        }
+        }        
     }
 
     public void RestartLevel()
@@ -105,7 +143,7 @@ public class LifeController : MonoBehaviour {
         }
 
         fullReset = true;
-        playerMovement.alive = false;
+        playerMovement.alive = false;        
     }
 
     public void Respawn()

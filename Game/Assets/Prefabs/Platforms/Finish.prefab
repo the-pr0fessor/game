@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c05a9a925f4d14b8847bc2b18e0426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   safe: 1
   finish: 1
   mustTouchPlayer: 0

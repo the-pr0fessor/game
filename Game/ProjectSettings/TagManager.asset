@@ -23,6 +23,7 @@ TagManager:
   - TunnelTriggerLeft
   - TunnelTriggerRight
   - TunnelTriggerMiddle
+  - SwitchCountCanvas
   layers:
   - Default
   - TransparentFX

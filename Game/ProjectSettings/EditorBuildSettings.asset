@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 4962992e05583a045a1f4d61b8bec6df
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Story/Implant.unity
     guid: 6a512bfce63ed414b9c89cc7be8db162
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 4962992e05583a045a1f4d61b8bec6df
+  - enabled: 0
     path: Assets/Scenes/Story/Intro.unity
     guid: 6e33967377e570e40b1a1c33186d8ee7
   - enabled: 1
@@ -72,6 +72,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Slide 1.unity
     guid: c712a9d4fd92878438657e6fb3775293
   - enabled: 1
+    path: Assets/Scenes/Levels/Two Down.unity
+    guid: dc8db4cba67711a4588777ad6b94a8e0
+  - enabled: 1
     path: Assets/Scenes/Levels/Switch.unity
     guid: e9222405022730647a26de23894d431f
   - enabled: 1
@@ -81,11 +84,23 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Parallel.unity
     guid: 379696319931f8c4b89e2705bbfab093
   - enabled: 1
+    path: Assets/Scenes/Levels/No Jump.unity
+    guid: e8dfa01a62bf0d4439f37d44523d0d04
+  - enabled: 1
     path: Assets/Scenes/Levels/Six.unity
     guid: acfeb4d54dbd7c247a33750f3d546218
   - enabled: 1
     path: Assets/Scenes/Levels/Pins.unity
     guid: 8dcfde4ed6a8cea4d80ced7b8f2e2f31
   - enabled: 1
-    path: Assets/Scenes/Levels/Two Down.unity
-    guid: dc8db4cba67711a4588777ad6b94a8e0
+    path: Assets/Scenes/Levels/No Jump 2.unity
+    guid: 77023b15919d9d14b8876a5e6c9652a2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Switch Limit.unity
+    guid: 5d6d45033a12f5942a88ad73144686cf
+  - enabled: 1
+    path: Assets/Scenes/Levels/Other Way.unity
+    guid: a1e62842bfd959f468766d917f7649f9
+  - enabled: 1
+    path: Assets/Scenes/Levels/So Close.unity
+    guid: 5f54b2a02bf669843aaaa34e1f1094bc
